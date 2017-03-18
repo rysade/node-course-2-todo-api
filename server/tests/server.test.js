@@ -97,11 +97,10 @@ describe('GET /todos/:id', () => {
     });
 
     it('should return 404 if todo not found', (done)  => {
-        let newID = new ObjectID();
+        let hexID = new ObjectID().toHexString();
 
         request(app)
-            .get(`/todos/${newID.toHexString()}`)
-            // .get(`/todos/${todos[0]._id.toHexString()}`)
+            .get(`/todos/${hexID}`)
             .expect(404)
             .end(done);
     });
@@ -110,7 +109,6 @@ describe('GET /todos/:id', () => {
         // /todos/123
         request(app)
             .get('/todos/123')
-            // .get(`/todos/${todos[0]._id.toHexString()}`)
             .expect(404)
             .end(done);
     })
